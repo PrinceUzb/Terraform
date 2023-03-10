@@ -13,8 +13,13 @@ resource "aws_instance" "my_ubuntu" {
   }
   user_data = file("user-data.sh")
 }
+
+# Default VPC
+resource "aws_default_vpc" "default" {}
+
 resource "aws_security_group" "my_webserver" {
   name        = "Webserver SG"
+  vpc_id      = aws_default_vpc.default.id
   description = "TEST"
   ingress {
     from_port   = 80
@@ -28,4 +33,7 @@ resource "aws_security_group" "my_webserver" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+}
+output "aws_instance_public_dns" {
+  value = aws_instance.my_ubuntu.public_dns
 }
