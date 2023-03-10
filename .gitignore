@@ -3,4 +3,5 @@
 .terraform
 .terraform.lock.hcl
 terraform.tfstate
-terraform.tfstate.buckup
+terraform.tfstate.backup
+Terraform.iml
